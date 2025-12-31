@@ -1,0 +1,61 @@
+<div class="occupation-form-container" [class.dialog-mode]="isDialog">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Thêm Nghề Nghiệp Mới</mat-card-title>
+      <button *ngIf="isDialog" mat-icon-button (click)="onCancel()" class="close-dialog-btn">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="occupationForm" (ngSubmit)="onSubmit()">
+
+        <!-- Error Message Display -->
+        @if (errorMessage) {
+          <div class="error-message-box">
+            {{ errorMessage }}
+          </div>
+        }
+
+        <!-- Occupation Code (Read-only, auto-generated) -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Mã Nghề Nghiệp</mat-label>
+          <input matInput formControlName="occCode" readonly>
+          <mat-hint>Mã số được tạo tự động bởi hệ thống</mat-hint>
+        </mat-form-field>
+
+        <!-- Occupation Name -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Tên Nghề Nghiệp</mat-label>
+          <input matInput formControlName="occName" maxlength="100" required (blur)="formatOccName()">
+          <mat-hint align="end">{{occupationForm.get('occName')?.value?.length || 0}}/100</mat-hint>
+          <mat-error *ngIf="occupationForm.get('occName')?.hasError('required')">
+            Tên nghề nghiệp là bắt buộc
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Description -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Mô tả</mat-label>
+          <textarea matInput formControlName="description" maxlength="500" rows="3"></textarea>
+          <mat-hint align="end">{{occupationForm.get('description')?.value?.length || 0}}/500</mat-hint>
+        </mat-form-field>
+
+        <!-- Form Actions -->
+        <div class="form-actions">
+          <button mat-raised-button type="button" (click)="onCancel()" [disabled]="isLoading">
+            Hủy
+          </button>
+          <button mat-raised-button color="primary" type="submit" [disabled]="occupationForm.invalid || isLoading">
+            @if (isLoading) {
+              Đang lưu...
+            } @else {
+              Lưu
+            }
+          </button>
+        </div>
+
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

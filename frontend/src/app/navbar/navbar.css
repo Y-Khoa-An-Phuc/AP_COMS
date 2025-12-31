@@ -1,0 +1,190 @@
+/* Toolbar styling with Material 3 green color */
+.menu-toolbar {
+  background-color: var(--mat-sys-primary);
+  color: var(--mat-sys-on-primary);
+  font-family: var(--mat-sys-body-medium-font, Roboto, sans-serif);
+}
+
+/* Limit content width so toolbar doesn't appear to cover whole screen */
+    .menu-container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .menu-logo {
+      display: flex;
+      align-items: center;
+    }
+
+    /* Smaller logo so it doesn't dominate the toolbar */
+    .logo-img {
+      height: 40px;
+      width: auto;
+      display: block;
+    }
+
+    .menu-nav {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .nav-link {
+      font-size: 14px;
+      font-weight: 500;
+      font-family: inherit;
+      letter-spacing: 0.0125em;
+      height: 40px;
+      line-height: 40px;
+      padding: 0 8px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* Dropdown arrow icon in nav link */
+    .nav-link mat-icon {
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+    }
+
+    /* Settings menu styling */
+    .settings-menu {
+      margin-top: 8px;
+    }
+
+    /* Submenu arrow positioning */
+    .submenu-arrow {
+      margin-left: auto;
+      opacity: 0.6;
+    }
+
+    /* Menu item styling with icons */
+    ::ng-deep .mat-mdc-menu-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+      font-weight: 400;
+      font-family: var(--mat-sys-body-medium-font, Roboto, sans-serif);
+      letter-spacing: 0.0125em;
+    }
+
+    ::ng-deep .mat-mdc-menu-item mat-icon:first-child {
+      margin-right: 8px;
+    }
+
+    ::ng-deep .mat-mdc-menu-item span {
+      font-size: 14px;
+      font-weight: 400;
+    }
+
+    .menu-spacer {
+      flex: 1 1 auto;
+    }
+
+    .menu-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Ensure icons are not oversized */
+    .user-avatar-icon,
+    .menu-actions mat-icon {
+      font-size: 20px;
+      color: var(--mat-sys-on-primary);
+    }
+
+    /* Burger menu button - hidden on desktop */
+    .burger-menu {
+      display: none;
+    }
+
+    /* Mobile drawer */
+    .mobile-drawer-container {
+      position: fixed;
+      top: 64px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .mobile-drawer {
+      width: 250px;
+      background-color: var(--mat-sys-surface);
+      pointer-events: auto;
+    }
+
+    .mobile-menu-content {
+      padding: 16px 0;
+    }
+
+    .mobile-nav-link {
+      width: 100%;
+      justify-content: flex-start;
+      padding: 12px 16px;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 14px;
+      font-weight: 400;
+      font-family: inherit;
+      letter-spacing: 0.0125em;
+    }
+
+    .mobile-nav-link span {
+      font-size: 14px;
+      font-weight: 400;
+    }
+
+    .mobile-nav-link mat-icon {
+      margin-right: 8px;
+    }
+
+    /* Responsive adjustments for small screens */
+    @media (max-width: 768px) {
+      /* Show burger menu */
+      .burger-menu {
+        display: inline-flex;
+        margin-right: 8px;
+      }
+
+      /* Hide desktop navigation */
+      .desktop-nav {
+        display: none !important;
+      }
+
+      /* Hide desktop search */
+      .desktop-search {
+        display: none !important;
+      }
+
+      .menu-toolbar {
+        height: 56px;
+        padding: 0 8px;
+      }
+
+      .logo-img {
+        height: 32px;
+      }
+
+      .menu-container {
+        gap: 8px;
+      }
+    }
+
+    /* Tablet and larger - hide mobile menu elements */
+    @media (min-width: 769px) {
+      .mobile-drawer-container {
+        display: none;
+      }
+    }

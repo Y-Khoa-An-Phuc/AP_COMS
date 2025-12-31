@@ -1,0 +1,110 @@
+<div class="auth-root">
+  <mat-card class="auth-card">
+    <div class="auth-left" aria-hidden="true"></div>
+
+    <div class="auth-right">
+      <div class="auth-logo">
+        <img src="/anphuc_logo_white.png" alt="An Phuc logo" />
+      </div>
+
+      <!-- Loading State: Validating Token -->
+      @if (isValidatingToken) {
+        <div class="loading-container">
+          <mat-spinner diameter="50"></mat-spinner>
+          <p class="loading-text">Đang xác thực liên kết...</p>
+        </div>
+      }
+
+      <!-- Error State: Invalid Token -->
+      @if (!isValidatingToken && !tokenValid) {
+        <div class="error-container">
+          <div class="error-icon">⚠️</div>
+          <h2>Liên kết không hợp lệ</h2>
+          <p class="error-text">{{ errorMessage }}</p>
+          <button mat-raised-button color="primary" (click)="router.navigateByUrl('/')">
+            Quay về trang đăng nhập
+          </button>
+        </div>
+      }
+
+      <!-- Success State: Valid Token - Show Password Form -->
+      @if (!isValidatingToken && tokenValid) {
+        <div class="auth-header">
+          <h2>Thiết lập mật khẩu</h2>
+          <p class="auth-subtitle">Chào mừng! Vui lòng thiết lập mật khẩu của bạn để tiếp tục.</p>
+        </div>
+
+        <form [formGroup]="passwordForm" (ngSubmit)="onSubmit()" class="auth-form">
+          <!-- Success Message Display -->
+          @if (successMessage) {
+            <div class="success-message-box">
+              {{ successMessage }}
+            </div>
+          }
+
+          <!-- Error Message Display -->
+          @if (errorMessage) {
+            <div class="error-message-box">
+              {{ errorMessage }}
+            </div>
+          }
+
+          <!-- Read-only User Info -->
+          <mat-form-field appearance="outline" class="full">
+            <mat-label>Tên đăng nhập</mat-label>
+            <input matInput [value]="username" readonly />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full">
+            <mat-label>Email</mat-label>
+            <input matInput [value]="email" readonly />
+          </mat-form-field>
+
+          <!-- New Password -->
+          <mat-form-field appearance="outline" class="full">
+            <mat-label>Mật khẩu mới</mat-label>
+            <input matInput type="password" formControlName="newPassword" autocomplete="new-password" />
+            @if (passwordForm.get('newPassword')?.hasError('required') && passwordForm.get('newPassword')?.touched) {
+              <mat-error>Mật khẩu mới là bắt buộc</mat-error>
+            }
+            @if (passwordForm.get('newPassword')?.hasError('minlength')) {
+              <mat-error>Mật khẩu phải có ít nhất 8 ký tự</mat-error>
+            }
+            @if (passwordForm.get('newPassword')?.hasError('passwordStrength')) {
+              <mat-error>Mật khẩu phải chứa chữ hoa, chữ thường, số và ký tự đặc biệt</mat-error>
+            }
+          </mat-form-field>
+
+          <!-- Confirm Password -->
+          <mat-form-field appearance="outline" class="full">
+            <mat-label>Xác nhận mật khẩu</mat-label>
+            <input matInput type="password" formControlName="confirmPassword" autocomplete="new-password" />
+            @if (passwordForm.get('confirmPassword')?.hasError('required') && passwordForm.get('confirmPassword')?.touched) {
+              <mat-error>Xác nhận mật khẩu là bắt buộc</mat-error>
+            }
+            @if (passwordForm.hasError('passwordMismatch') && passwordForm.get('confirmPassword')?.touched) {
+              <mat-error>Mật khẩu xác nhận không khớp</mat-error>
+            }
+          </mat-form-field>
+
+          <!-- Password Requirements Helper Text -->
+          <div class="password-hint">
+            <small>
+              Mật khẩu phải có ít nhất 8 ký tự và bao gồm: chữ hoa, chữ thường, số và ký tự đặc biệt (!@#$%^&*...)
+            </small>
+          </div>
+
+          <div class="auth-actions">
+            <button mat-raised-button color="primary" type="submit" [disabled]="passwordForm.invalid || isLoading">
+              @if (isLoading) {
+                Đang thiết lập...
+              } @else {
+                Thiết lập mật khẩu & Tiếp tục
+              }
+            </button>
+          </div>
+        </form>
+      }
+    </div>
+  </mat-card>
+</div>

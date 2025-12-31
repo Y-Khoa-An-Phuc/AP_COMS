@@ -1,0 +1,48 @@
+<div class="auth-root">
+      <mat-card class="auth-card">
+        <div class="auth-left" aria-hidden="true"></div>
+
+        <div class="auth-right">
+          <div class="auth-logo">
+            <img src="/anphuc_logo_white.png" alt="An Phuc logo" />
+          </div>
+
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="auth-form">
+            <!-- Error Message Display -->
+            @if (errorMessage) {
+              <div class="error-message-box">
+                {{ errorMessage }}
+              </div>
+            }
+
+            <mat-form-field appearance="outline" class="full">
+              <mat-label>Tên đăng nhập</mat-label>
+              <input matInput formControlName="username" autocomplete="username" />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full">
+              <mat-label>Mật khẩu</mat-label>
+              <input matInput type="password" formControlName="password" autocomplete="current-password" />
+              @if (loginForm.get('password')?.hasError('required')) {
+                <mat-error>Mật khẩu là bắt buộc</mat-error>
+              }
+
+              @if (loginForm.get('password')?.hasError('mismatch')) {
+                <mat-error>Mật khẩu không khớp với username</mat-error>
+              }
+            </mat-form-field>
+
+            <div class="auth-forgot"><a class="muted" href="#">Quên mật khẩu</a></div>
+            <div class="auth-actions">
+              <button matButton="filled" color="primary" type="submit" [disabled]="loginForm.invalid || isLoading">
+                @if (isLoading) {
+                  Đang đăng nhập...
+                } @else {
+                  Đăng nhập
+                }
+              </button>
+            </div>
+          </form>
+        </div>
+      </mat-card>
+    </div>

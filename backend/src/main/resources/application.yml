@@ -1,0 +1,81 @@
+spring:
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:default}
+  config:
+    import: optional:file:.env[.properties]
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USER}
+    password: ${DB_PASS}
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.SQLServerDialect
+        use_nationalized_character_data: true
+
+  flyway:
+    enabled: false  # Managed manually in FlywayConfig to run after Hibernate
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+    baseline-version: 0
+
+  # Spring Mail configuration for Gmail SMTP
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${SMTP_USERNAME}
+    password: ${SMTP_APP_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+        transport:
+          protocol: smtp
+    default-encoding: UTF-8
+
+  # Thymeleaf configuration for email templates
+  thymeleaf:
+    cache: false
+    mode: HTML
+    encoding: UTF-8
+
+server:
+  port: 8080
+
+jwt:
+  secret: ${JWT_SECRET:dGhpc2lzYXZlcnlsb25nc2VjcmV0a2V5Zm9yand0dG9rZW5zaWduaW5nYW5kaXRzaG91bGRiZWF0bGVhc3QyNTZiaXRz}
+  expiration: ${JWT_EXPIRATION:900000}  # 15 minutes in milliseconds
+
+security:
+  password:
+    argon2:
+      saltLength: 16
+      hashLength: 32
+      parallelism: 1
+      memory: 65536
+      iterations: 3
+  login:
+    max-failed-attempts: ${MAX_FAILED_LOGIN_ATTEMPTS:5}
+    lockout-duration-minutes: ${LOCKOUT_DURATION_MINUTES:15}
+
+app:
+  frontend:
+    base-url: ${FRONTEND_BASE_URL:http://localhost:4200}
+
+# Email configuration
+email:
+  from:
+    address: ${SMTP_FROM_ADDRESS:${SMTP_USERNAME}}
+    name: ${SMTP_FROM_NAME:An Phuc Contract Management}
+  branding:
+    company-name: An Phuc Contract Management
+    support-email: ${SMTP_SUPPORT_EMAIL:support@anphuc.com}
+    logo-url: ${EMAIL_LOGO_URL:}

@@ -1,0 +1,161 @@
+<div class="employee-form-container" [class.dialog-mode]="isDialog">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Thêm Nhân Viên Mới</mat-card-title>
+      <button *ngIf="isDialog" mat-icon-button (click)="onCancel()" class="close-dialog-btn">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+
+        <!-- Employee ID -->
+
+        <!-- Last Name -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Họ</mat-label>
+          <input matInput formControlName="lastName" maxlength="50" required>
+          <mat-hint align="end">{{employeeForm.get('lastName')?.value?.length || 0}}/50</mat-hint>
+          <mat-error *ngIf="employeeForm.get('lastName')?.hasError('required')">
+            Họ là bắt buộc
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Middle Name -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Tên đệm</mat-label>
+          <input matInput formControlName="middleName" maxlength="100">
+          <mat-hint align="end">{{employeeForm.get('middleName')?.value?.length || 0}}/100</mat-hint>
+        </mat-form-field>
+
+        <!-- First Name -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Tên</mat-label>
+          <input matInput formControlName="firstName" maxlength="50" required>
+          <mat-hint align="end">{{employeeForm.get('firstName')?.value?.length || 0}}/50</mat-hint>
+          <mat-error *ngIf="employeeForm.get('firstName')?.hasError('required')">
+            Tên là bắt buộc
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Full Name -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Tên đầy đủ</mat-label>
+          <input matInput formControlName="fullName" maxlength="200">
+          <mat-hint align="end">{{employeeForm.get('fullName')?.value?.length || 0}}/200</mat-hint>
+        </mat-form-field>
+
+        <!-- Email -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" type="email">
+          <mat-error *ngIf="employeeForm.get('email')?.hasError('email')">
+            Email không hợp lệ
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Hire Date -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Ngày tuyển dụng</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="hireDt" required>
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="employeeForm.get('hireDt')?.hasError('required')">
+            Ngày tuyển dụng là bắt buộc
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Termination Date -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Ngày nghỉ việc</mat-label>
+          <input matInput [matDatepicker]="terminationPicker" formControlName="terminationDt">
+          <mat-datepicker-toggle matIconSuffix [for]="terminationPicker"></mat-datepicker-toggle>
+          <mat-datepicker #terminationPicker></mat-datepicker>
+        </mat-form-field>
+
+        <!-- Citizen ID Card -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Số CMND/CCCD</mat-label>
+          <input matInput formControlName="citizenIdCard">
+          <mat-error *ngIf="employeeForm.hasError('identityRequired')">
+            Phải nhập CMND/CCCD hoặc Hộ chiếu
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Passport -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Số hộ chiếu</mat-label>
+          <input matInput formControlName="passport">
+          <mat-error *ngIf="employeeForm.hasError('identityRequired')">
+            Phải nhập CMND/CCCD hoặc Hộ chiếu
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Contract ID -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Mã hợp đồng</mat-label>
+          <input matInput formControlName="contractId">
+        </mat-form-field>
+
+        <!-- Occupation -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Nghề nghiệp</mat-label>
+          <mat-select formControlName="occupation">
+            @for (occ of occupations(); track occ.occCode) {
+              <mat-option [value]="occ.occCode">{{ occ.occName }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+ 
+        <!-- Organization -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Bộ phận</mat-label>
+          <input matInput formControlName="organization">
+        </mat-form-field>
+
+
+        <!-- Work Location -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Địa điểm làm việc</mat-label>
+          <input matInput formControlName="workLocation">
+        </mat-form-field>
+
+        <!-- Phone -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Số điện thoại</mat-label>
+          <input matInput formControlName="phone">
+        </mat-form-field>
+        
+
+        <!-- Supervisor Employee ID -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Mã nhân viên quản lý</mat-label>
+          <input matInput formControlName="supvEmployee">
+        </mat-form-field>
+
+        <!-- Work Status -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Trạng thái làm việc</mat-label>
+          <mat-select formControlName="workStatus">
+            @for (status of workStatusOptions; track status) {
+              <mat-option [value]="status">{{ status }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Form Actions -->
+        <div class="form-actions">
+          <button mat-raised-button type="button" (click)="onCancel()">
+            Hủy
+          </button>
+          <button mat-raised-button color="primary" type="submit">
+            Lưu
+          </button>
+        </div>
+
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

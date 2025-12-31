@@ -1,0 +1,106 @@
+
+// Include theming for Angular Material with `mat.theme()`.
+// This Sass mixin will define CSS variables that are used for styling Angular Material
+// components according to the Material 3 design spec.
+// Learn more about theming and how to use it for your application's
+// custom components at https://material.angular.dev/guide/theming
+@use '@angular/material' as mat;
+
+html {
+  @include mat.theme((
+    color: (
+      primary: mat.$green-palette,
+      tertiary: mat.$orange-palette,
+    ),
+    typography: Roboto,
+    density: 0,
+  ));
+}
+
+body {
+  // Default the application to a light color theme. This can be changed to
+  // `dark` to enable the dark color theme, or to `light dark` to defer to the
+  // user's system settings.
+  color-scheme: light;
+
+  // Set a default background, font and text colors for the application using
+  // Angular Material's system-level CSS variables. Learn more about these
+  // variables at https://material.angular.dev/guide/system-variables
+  background-color: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
+  font: var(--mat-sys-body-medium);
+
+  // Reset the user agent margin.
+  margin: 0;
+}
+
+// Override Material 3 system variables with custom green color
+:root {
+  // Primary color overrides
+  --mat-sys-primary: #068A1F;
+  --mat-sys-on-primary: #ffffff;
+  --mat-sys-primary-container: #a6f5a0;
+  --mat-sys-on-primary-container: #002204;
+
+  // Form field focus colors
+  --mdc-filled-text-field-focus-active-indicator-color: #057019;
+  --mdc-outlined-text-field-focus-outline-color: #057019;
+  --mdc-outlined-text-field-focus-label-text-color: #057019;
+  --mat-form-field-focus-select-arrow-color: #057019;
+
+  // Additional overrides for consistency
+  --mdc-filled-text-field-caret-color: #057019;
+  --mdc-outlined-text-field-caret-color: #057019;
+  --mat-select-focused-arrow-color: #057019;
+}
+
+// Direct CSS overrides for form field colors (higher specificity)
+.mat-mdc-form-field.mat-focused {
+  .mdc-notched-outline__leading,
+  .mdc-notched-outline__notch,
+  .mdc-notched-outline__trailing {
+    border-color: #057019 !important;
+  }
+
+  .mat-mdc-floating-label {
+    color: #057019 !important;
+  }
+}
+
+.mdc-text-field--outlined:not(.mdc-text-field--disabled) {
+  .mdc-notched-outline__leading,
+  .mdc-notched-outline__notch,
+  .mdc-notched-outline__trailing {
+    border-color: #bdbdbd !important;
+  }
+}
+
+.mdc-text-field--outlined:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover {
+  .mdc-notched-outline__leading,
+  .mdc-notched-outline__notch,
+  .mdc-notched-outline__trailing {
+    border-color: #057019 !important;
+  }
+}
+
+.mdc-text-field--outlined.mdc-text-field--focused {
+  .mdc-notched-outline__leading,
+  .mdc-notched-outline__notch,
+  .mdc-notched-outline__trailing {
+    border-color: #057019 !important;
+  }
+}
+
+// Override primary button color
+.mat-mdc-raised-button.mat-primary {
+  background-color: #068A1F !important;
+}
+
+// Override checkbox and select colors
+.mat-mdc-checkbox.mat-primary {
+  --mdc-checkbox-selected-checkmark-color: #ffffff;
+  --mdc-checkbox-selected-focus-icon-color: #068A1F;
+  --mdc-checkbox-selected-hover-icon-color: #068A1F;
+  --mdc-checkbox-selected-icon-color: #068A1F;
+  --mdc-checkbox-selected-pressed-icon-color: #068A1F;
+}

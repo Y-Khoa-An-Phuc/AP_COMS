@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <div th:fragment="content">
+        <h2>Chào mừng đến với Hệ thống Quản lý Hợp đồng An Phúc!</h2>
+
+        <p>Xin chào <strong th:text="${username}">User</strong>,</p>
+
+        <p>
+            Tài khoản của bạn đã được tạo thành công bởi quản trị viên.
+            Để bắt đầu, bạn cần thiết lập mật khẩu của mình.
+        </p>
+
+        <div class="button-container">
+            <a th:href="${firstLoginLink}" class="btn">Thiết Lập Mật Khẩu</a>
+        </div>
+
+        <div class="info-box">
+            <p><strong>Thông tin tài khoản:</strong></p>
+            <p>Tên đăng nhập: <strong th:text="${username}">username</strong></p>
+            <p>Email: <strong th:text="${email}">email@example.com</strong></p>
+        </div>
+
+        <p>
+            Vì lý do bảo mật, liên kết này chỉ có thể được sử dụng một lần. Sau khi thiết lập mật khẩu,
+            bạn sẽ được tự động đăng nhập và có thể bắt đầu sử dụng hệ thống.
+        </p>
+
+        <div class="warning-box">
+            <p><strong>Lưu ý bảo mật:</strong></p>
+            <p>
+                Nếu bạn không yêu cầu tài khoản này hoặc tin rằng email này được gửi nhầm,
+                vui lòng liên hệ với quản trị viên hệ thống ngay lập tức.
+            </p>
+        </div>
+
+        <p style="margin-top: 30px;">
+            Trân trọng,<br/>
+            <strong>Đội ngũ IT An Phúc</strong>
+        </p>
+    </div>
+</body>
+</html>

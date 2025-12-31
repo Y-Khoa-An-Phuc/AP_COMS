@@ -1,0 +1,125 @@
+<mat-toolbar class="menu-toolbar">
+    <div class="menu-container">
+    <!-- Burger Menu Button (Mobile Only) -->
+    <button mat-icon-button class="burger-menu" (click)="toggleMobileMenu()">
+        <mat-icon>menu</mat-icon>
+    </button>
+
+    <!-- Logo / Brand -->
+    <div class="menu-logo">
+        <img src="/anphuc_logo_white.png" alt="AnPhuc logo" class="logo-img" loading="lazy" style = "width:40px; border-radius: 50px"/>
+    </div>
+
+    <!-- Navigation Links (Desktop) -->
+    <nav class="menu-nav desktop-nav">
+        <button mat-button class="nav-link">Dashboard</button>
+        <button mat-button class="nav-link" [matMenuTriggerFor]="settingsMenu">
+          Cài Đặt
+          <mat-icon>arrow_drop_down</mat-icon>
+        </button>
+
+        <!-- Settings Menu with nested submenus -->
+        <mat-menu #settingsMenu="matMenu" class="settings-menu">
+          <!-- Thông tin nhân viên -->
+          <button mat-menu-item [matMenuTriggerFor]="employeeMenu">
+            <mat-icon>badge</mat-icon>
+            <span>Nhân Sự</span>
+            <mat-icon class="submenu-arrow">chevron_right</mat-icon>
+          </button>
+
+          <!-- Thông Tin Người Dùng -->
+          <button mat-menu-item [matMenuTriggerFor]="userInfoMenu">
+            <mat-icon>person</mat-icon>
+            <span>Người Dùng</span>
+            <mat-icon class="submenu-arrow">chevron_right</mat-icon>
+          </button>
+
+          <!-- Quyền hạn -->
+          <button mat-menu-item [matMenuTriggerFor]="permissionMenu">
+            <mat-icon>security</mat-icon>
+            <span>Quyền hạn</span>
+            <mat-icon class="submenu-arrow">chevron_right</mat-icon>
+          </button>
+        </mat-menu>
+
+        <!-- Employee submenu -->
+        <mat-menu #employeeMenu="matMenu">
+          <button mat-menu-item (click)="navigateToViewEmployee()">
+            <mat-icon>list</mat-icon>
+            <span>Danh Sách Nhân Viên</span>
+          </button>
+           <button mat-menu-item (click)="navigateToViewOccupation()">
+            <mat-icon>list</mat-icon>
+            <span>Danh sách Nghề Nghiệp</span>
+          </button>
+        </mat-menu>
+
+        <!-- User Info submenu -->
+        <mat-menu #userInfoMenu="matMenu">
+          <button mat-menu-item>
+            <mat-icon>person_add</mat-icon>
+            <span>Thêm Người Dùng</span>
+          </button>
+        </mat-menu>
+
+        <!-- Permission submenu -->
+        <mat-menu #permissionMenu="matMenu">
+          <button mat-menu-item>
+            <mat-icon>add_circle</mat-icon>
+            <span>Thêm</span>
+          </button>
+        </mat-menu>
+    </nav>
+
+    <!-- Spacer -->
+    <span class="menu-spacer"></span>
+
+    <!-- Search & Icons -->
+    <div class="menu-actions">
+        <button mat-icon-button class="search-btn desktop-search" matTooltip="Search">
+        <mat-icon>search</mat-icon>
+        </button>
+
+        <button mat-icon-button [matMenuTriggerFor]="userMenu" class="user-btn">
+        <mat-icon class="user-avatar-icon">account_circle</mat-icon>
+        </button>
+
+        <mat-menu #userMenu="matMenu" class="user-menu">
+        <button mat-menu-item>
+            <mat-icon>person</mat-icon>
+            <span>Hồ sơ</span>
+        </button>
+        <button mat-menu-item>
+            <mat-icon>settings</mat-icon>
+            <span>Cài đặt tài khoản</span>
+        </button>
+        <mat-divider></mat-divider>
+        <button mat-menu-item (click)="logout()">
+            <mat-icon>logout</mat-icon>
+            <span>Đăng xuất</span>
+        </button>
+        </mat-menu>
+    </div>
+    </div>
+</mat-toolbar>
+
+<!-- Mobile Drawer Menu -->
+<mat-drawer-container class="mobile-drawer-container" autosize>
+  <mat-drawer #drawer class="mobile-drawer" mode="over" [(opened)]="isMobileMenuOpen">
+    <div class="mobile-menu-content">
+      <button mat-button class="mobile-nav-link" (click)="toggleMobileMenu()">
+        <mat-icon>dashboard</mat-icon>
+        <span>Dashboard</span>
+      </button>
+      <button mat-button class="mobile-nav-link" (click)="toggleMobileMenu()">
+        <mat-icon>settings</mat-icon>
+        <span>Cài Đặt</span>
+      </button>
+      <mat-divider></mat-divider>
+      <button mat-button class="mobile-nav-link" (click)="toggleMobileMenu()">
+        <mat-icon>search</mat-icon>
+        <span>Tìm kiếm</span>
+      </button>
+    </div>
+  </mat-drawer>
+</mat-drawer-container>

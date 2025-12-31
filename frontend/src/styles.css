@@ -1,0 +1,40 @@
+/* Global styles */
+
+.cdk-overlay-dark-backdrop {
+  background-color: rgba(20, 20, 20, 0.792) !important;
+}
+
+/* Custom dropdown panel styling */
+.mat-mdc-select-panel {
+  background-color: #E7F5EA !important;
+}
+
+.mat-mdc-option {
+  color: #333 !important;
+}
+
+.mat-mdc-option:hover:not(.mdc-list-item--disabled) {
+  background-color: rgba(6, 138, 31, 0.1) !important;
+}
+
+.mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) {
+  background-color: rgba(6, 138, 31, 0.2) !important;
+}
+
+.mat-mdc-option .mdc-list-item__primary-text {
+  color: #333 !important;
+}
+
+.mat-mdc-select-min-line
+{
+  color: #333 !important;
+}
+
+.delete-icon {
+  color: #666 !important;
+}
+
+.mat-mdc-dialog-surface{
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background-color: #057019 !important
+}

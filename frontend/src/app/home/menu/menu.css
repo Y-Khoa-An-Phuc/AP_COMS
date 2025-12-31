@@ -1,0 +1,110 @@
+.menu-toolbar {
+  background: var(--primary, #4CAF50);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  height: 64px;
+  padding: 0;
+}
+
+.menu-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  gap: 2rem;
+}
+
+/* Logo */
+.menu-logo {
+  flex-shrink: 0;
+}
+
+.logo-text {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #fff;
+}
+
+/* Navigation */
+.menu-nav {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.nav-link {
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-transform: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+
+.nav-link:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Spacer */
+.menu-spacer {
+  flex: 1;
+}
+
+/* Actions (Search + User) */
+.menu-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.search-btn,
+.user-btn {
+  color: #fff;
+  transition: background 0.2s ease;
+}
+
+.search-btn:hover,
+.user-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.user-avatar-icon {
+  font-size: 28px;
+  width: 28px;
+  height: 28px;
+}
+
+/* User Menu */
+.user-menu {
+  min-width: 200px;
+}
+
+.user-menu mat-icon {
+  margin-right: 0.75rem;
+  color: var(--primary, #4CAF50);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .menu-container {
+    padding: 0 1rem;
+    gap: 1rem;
+  }
+
+  .menu-nav {
+    gap: 0.25rem;
+  }
+
+  .nav-link {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+  }
+
+  .logo-text {
+    font-size: 1.1rem;
+  }
+}
